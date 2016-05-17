@@ -2,29 +2,27 @@ package com.superdroid.gank;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.superdroid.data.repository.ArticleDataRepository;
-import com.superdroid.data.source.local.ArticleLocalDataSource;
-import com.superdroid.data.source.remote.ArticleRemoteDataSource;
 import com.superdroid.gank.android.AndroidArticleFragment;
 import com.superdroid.gank.android.AndroidArticlePresenter;
+import com.superdroid.gank.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.fl_container)
     FrameLayout frag_container;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        Log.e("tag", "navigator=" + navigator);
+        navigator.navigateToArticleDetail();
         AndroidArticleFragment fragment = AndroidArticleFragment.getInstance();
         AndroidArticlePresenter presenter = new AndroidArticlePresenter(fragment);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
